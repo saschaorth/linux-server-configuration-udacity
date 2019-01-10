@@ -70,3 +70,7 @@ with: `ssh -i ~/.ssh/lightsail.rsa ubuntu@54.93.126.222 -p 2200`
 
 Enable password authentication by editing: `sudo nano /etc/ssh/sshd_config` and change `PasswordAuthentication yes` to `PasswordAuthentication no`
 Now run `sudo service ssh restart`
+
+## Configure the local timezone to UTC.
+
+Run `sudo dpkg-reconfigure tzdata`. First select **none of the above**, then select **UTC**
