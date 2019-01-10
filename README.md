@@ -68,9 +68,17 @@ with: `ssh -i ~/.ssh/lightsail.rsa ubuntu@54.93.126.222 -p 2200`
 `sudo chown grader:grader /home/grader/.ssh/authorized_keys`
 `sudo chmod 644 /home/grader/.ssh/authorized_keys`
 
-Enable password authentication by editing: `sudo nano /etc/ssh/sshd_config` and change `PasswordAuthentication yes` to `PasswordAuthentication no`
-Now run `sudo service ssh restart`
+- Enable password authentication by editing: `sudo nano /etc/ssh/sshd_config` and change `PasswordAuthentication yes` to `PasswordAuthentication no`
+- Now run `sudo service ssh restart`
 
 ## Configure the local timezone to UTC.
 
-Run `sudo dpkg-reconfigure tzdata`. First select **none of the above**, then select **UTC**
+- Run `sudo dpkg-reconfigure tzdata`. First select **none of the above**, then select **UTC**
+
+## Install and configure Apache to serve a Python mod_wsgi application
+
+- Install Apache with: `sudo apt-get install apache2`
+- Check if it worked by going to `http://54.93.126.222`. It worked if you see the **Apache2 Ubuntu Default Page**
+- Install mod_wsgi with: `sudo apt-get install libapache2-mod-wsgi python-dev`
+- Enable mod_wsgi with: `sudo a2enmod wsgi`
+- Restart Apache with: `sudo service apache2 restart`
