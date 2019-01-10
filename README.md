@@ -43,3 +43,13 @@ with: `cat ~/Downloads/LightsailDefaultKey-eu-central-1.pem > lightsail.rsa`
 - Update the firewall configuration on Amazon Lightsail website under **Networking**. Delete default SSH port 22 and add **port 80, 123, 2200**
 - Open up a new terminal and you can now ssh in via the new port 2200 
 with: `ssh -i ~/.ssh/lightsail.rsa ubuntu@54.93.126.222 -p 2200`
+
+## Create a new user account named grader.
+
+- Create user with: `sudo adduser grader`
+
+## Give grader the permission to sudo.
+
+- Create file to add user to the sudoers with: `touch /etc/sudoers.d/grader`
+- Open the file with: `sudo /etc/sudoers.d/grader`
+- Add the following line to the file: `ALL=(ALL:ALL) ALL` and save it.
