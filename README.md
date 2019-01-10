@@ -22,3 +22,8 @@ with: `cat ~/Downloads/LightsailDefaultKey-eu-central-1.pem > lightsail.rsa`
 
 - Upgrade package indexes with: `sudo apt-get update`
 - Upgrade all installed packages with `sudo apt-get upgrade`
+
+## Change the SSH port from 22 to 2200. Make sure to configure the Lightsail firewall to allow it.
+
+- Edit file with `nano /etc/ssh/sshd_config` and change `Port 22` to `Port 2200` 
+- Restart the SSH service with: `sudo service ssh restart`
