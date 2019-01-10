@@ -53,3 +53,20 @@ with: `ssh -i ~/.ssh/lightsail.rsa ubuntu@54.93.126.222 -p 2200`
 - Create file to add user to the sudoers with: `touch /etc/sudoers.d/grader`
 - Open the file with: `sudo /etc/sudoers.d/grader`
 - Add the following line to the file: `ALL=(ALL:ALL) ALL` and save it.
+
+## Create ssh keys for grader
+
+- Create ssh keys on you local machine with `ssh-keygen`
+- Save the files generated under `~/.ssh`
+- Upload your public key (the one that ends with .pub) to your remote server)
+- On the remove server run the following commands to activate the public key 
+`sudo mkdir /home/grader/.ssh`
+`sudo chown grader:grader /home/grader/.ssh`
+`sudo chmod 700 /home/grader/.ssh`
+`sudo touch /home/grader/.ssh/authorized_keys`
+`sudo nano /home/grader/.ssh/authorized_keys` and paste the public key
+`sudo chown grader:grader /home/grader/.ssh/authorized_keys`
+`sudo chmod 644 /home/grader/.ssh/authorized_keys`
+
+Enable password authentication by editing: `sudo nano /etc/ssh/sshd_config` and change `PasswordAuthentication yes` to `PasswordAuthentication no`
+Now run `sudo service ssh restart`
