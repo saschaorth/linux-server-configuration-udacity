@@ -16,7 +16,7 @@
 - Paste the content of the downloaded file into `~/.ssh/lighsail.rsa` 
 with: `cat ~/Downloads/LightsailDefaultKey-eu-central-1.pem > lightsail.rsa`
 - Change the file permissions to: `chmod 600 ~/.ssh/lighsail.rsa`
-- Login to the server with: `ssh -i ~/.ssh/lighsail.rsa ubuntu@54.93.126.222`
+- Login to the server with: `ssh -i ~/.ssh/lighsail.rsa ubuntu@18.197.0.52`
 
 ## Update all currently installed packages
 
