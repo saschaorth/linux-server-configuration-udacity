@@ -1,5 +1,11 @@
 # Linux server configuration Udacity
 
+## Details for reviewer
+
+- Public ip: `18.197.0.52`
+- SSH port: `2200`
+- Item Catalog URL: `http://ec2-18-197-0-52.eu-central-1.compute.amazonaws.com/catalog/`
+
 ## Start a new Ubuntu Linux Server instance on Amazon Lightsail
 - Create an AWS account
 - Choose **Lightsail** under **Services**
