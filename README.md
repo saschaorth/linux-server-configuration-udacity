@@ -26,8 +26,7 @@ with: `cat ~/Downloads/LightsailDefaultKey-eu-central-1.pem > lightsail.rsa`
 
 ## Update all currently installed packages
 
-- Upgrade package indexes with: `sudo apt-get update`
-- Upgrade all installed packages with `sudo apt-get upgrade`
+- Run updates with: `sudo apt-get update && sudo apt-get dist-upgrade`
 
 ## Change the SSH port from 22 to 2200
 
