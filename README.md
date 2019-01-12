@@ -50,6 +50,11 @@ with: `cat ~/Downloads/LightsailDefaultKey-eu-central-1.pem > lightsail.rsa`
 - Open up a new terminal and you can now ssh in via the new port 2200 
 with: `ssh -i ~/.ssh/lightsail.rsa ubuntu@18.197.0.52 -p 2200`
 
+## Disable root login
+
+- Go to `/etc/ssh/sshd_config` and change `PermitRootLogin prohibit-password` to `PermitRootLogin no`
+Run `sudo service sshd restart`
+
 ## Create a new user named grader
 
 - Create user with: `sudo adduser grader`
