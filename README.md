@@ -143,8 +143,8 @@ application.secret_key = 'super_secret_key
 - Create file with: `sudo touch /etc/apache2/sites-available/catalog.conf` and add the following:
 ```
 <VirtualHost *:80>
-        ServerName 54.93.126.222
-        ServerAdmin admin@54.93.126.222
+        ServerName 18.197.0.52
+        ServerAdmin admin@18.197.0.52
         WSGIDaemonProcess catalog python-path=/var/www/catalog:/var/www/catalog/venv/lib/python2.7/site-packages  python-home=/var/www/catalog/venv
         WSGIProcessGroup catalog
         WSGIScriptAlias / /var/www/catalog/catalog.wsgi
