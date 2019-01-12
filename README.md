@@ -16,6 +16,8 @@
 - Name your instance
 - Click **Create**
 
+[Source](https://aws.amazon.com/lightsail/?p=tile)
+
 ## SSH into your Server
 - Download the private key from the **SSH keys** section in the **Account** section on Amazon Lightsail. 
 - Create a new file under `~/.ssh` .e.g: `~/.ssh/lighsail.rsa`
@@ -24,14 +26,20 @@ with: `cat ~/Downloads/LightsailDefaultKey-eu-central-1.pem > lightsail.rsa`
 - Change the file permissions to: `chmod 600 ~/.ssh/lighsail.rsa`
 - Login to the server with: `ssh -i ~/.ssh/lighsail.rsa ubuntu@18.197.0.52`
 
+[Source](https://www.digitalocean.com/community/tutorials/how-to-set-up-ssh-keys-on-ubuntu-1604)
+
 ## Update all currently installed packages
 
 - Run updates with: `sudo apt-get update && sudo apt-get dist-upgrade`
+
+[Source](https://serverfault.com/questions/265410/ubuntu-server-message-says-packages-can-be-updated-but-apt-get-does-not-update)
 
 ## Change the SSH port from 22 to 2200
 
 - Edit file with `nano /etc/ssh/sshd_config` and change `Port 22` to `Port 2200` 
 - Restart the SSH service with: `sudo service ssh restart`
+
+[Source](https://www.tecmint.com/change-ssh-port-in-linux/)
 
 ## Configure the Uncomplicated Firewall (UFW)
 
@@ -49,20 +57,28 @@ with: `cat ~/Downloads/LightsailDefaultKey-eu-central-1.pem > lightsail.rsa`
 - Open up a new terminal and you can now ssh in via the new port 2200 
 with: `ssh -i ~/.ssh/lightsail.rsa ubuntu@18.197.0.52 -p 2200`
 
+[Source](https://help.ubuntu.com/community/UFW)
+
 ## Disable root login
 
 - Go to `/etc/ssh/sshd_config` and change `PermitRootLogin prohibit-password` to `PermitRootLogin no`
 Run `sudo service sshd restart`
 
+[Source](https://www.tecmint.com/disable-root-login-in-linux/)
+
 ## Create a new user named grader
 
 - Create user with: `sudo adduser grader`
+
+[Source](https://classroom.udacity.com/nanodegrees/nd004/parts/b2de4bd4-ef07-45b1-9f49-0e51e8f1336e/modules/56cf3482-b006-455c-8acd-26b37b6458d2/lessons/4331066009/concepts/48010894680923)
 
 ## Give grader the permission to sudo
 
 - Create file to add user to the sudoers with: `touch /etc/sudoers.d/grader`
 - Open the file with: `sudo /etc/sudoers.d/grader`
 - Add the following line to the file: `ALL=(ALL:ALL) ALL` and save it
+
+[Source](https://classroom.udacity.com/nanodegrees/nd004/parts/b2de4bd4-ef07-45b1-9f49-0e51e8f1336e/modules/56cf3482-b006-455c-8acd-26b37b6458d2/lessons/4331066009/concepts/48010894710923)
 
 ## Create ssh keys for grader
 
@@ -81,9 +97,13 @@ Run `sudo service sshd restart`
 - Enable password authentication by editing: `sudo nano /etc/ssh/sshd_config` and change `PasswordAuthentication yes` to `PasswordAuthentication no`
 - Now run `sudo service ssh restart`
 
+[Source](https://www.digitalocean.com/community/tutorials/how-to-set-up-ssh-keys-on-ubuntu-1604)
+
 ## Configure the local timezone to UTC
 
 - Run `sudo dpkg-reconfigure tzdata`. First select **none of the above**, then select **UTC**
+
+[Source](https://askubuntu.com/questions/138423/how-do-i-change-my-timezone-to-utc-gmt)
 
 ## Install and configure Apache to serve a Python mod_wsgi application
 
@@ -93,11 +113,15 @@ Run `sudo service sshd restart`
 - Enable mod_wsgi with: `sudo a2enmod wsgi`
 - Restart Apache with: `sudo service apache2 restart`
 
+[Source](https://www.digitalocean.com/community/tutorials/how-to-deploy-a-flask-application-on-an-ubuntu-vps)
+
 ## Install and configure PostgreSQL
 
 - Install PostgreSQL with: `sudo apt-get install postgresql`
 - Create database user with: `sudo -u postgres createuser -P catalog`
 - Create database named **catalog** owned by database user **catalog** with: `sudo -u postgres createdb -O catalog catalog`
+
+[Source](https://help.ubuntu.com/community/PostgreSQL)
 
 ## Install and create virtalenv
 
@@ -105,6 +129,8 @@ Run `sudo service sshd restart`
 - Go to `/var/www/catalog`
 - Run `virtualenv venv`
 - Activate virtualenv with `source venv/bin/activate`
+
+[Source](https://www.digitalocean.com/community/tutorials/how-to-deploy-a-flask-application-on-an-ubuntu-vps)
 
 ## Install the following dependencies
 
@@ -142,6 +168,8 @@ application.secret_key = 'super_secret_key
 - Also change line `app.run(host='0.0.0.0', port=8000)` to `app.run()`
 - Update file `'/var/www/catalog/catalog/client_secrets.json'` with host name `http://ec2-18-197-0-52.eu-central-1.compute.amazonaws.com`
 
+[Source](https://www.digitalocean.com/community/tutorials/how-to-deploy-a-flask-application-on-an-ubuntu-vps)
+
 ## Setup virtual host
 
 - Create file with: `sudo touch /etc/apache2/sites-available/catalog.conf` and add the following:
@@ -166,15 +194,23 @@ application.secret_key = 'super_secret_key
 ```
 - Restart Apache with: `sudo service apache2 reload`
 
+##### Sources
+- [Digital Ocean](https://www.digitalocean.com/community/tutorials/how-to-deploy-a-flask-application-on-an-ubuntu-vps)
+- [modwsgi configuration directives](https://code.google.com/archive/p/modwsgi/wikis/ConfigurationDirectives.wiki#WSGIDaemonProcess)
+
 ## Disable Apache default page
 
 - Run `sudo a2dissite 000-default.conf`
 - Restart Apache with:`sudo service apache2 reload`
 
+[Source](https://www.digitalocean.com/community/questions/how-do-i-remove-apache2-ubuntu-default-page)
+
 ## Enable sudo a2ensite catalog.conf
 
 - Run `sudo a2ensite catalog.conf`
 - Restart Apache with:`sudo service apache2 reload`
+
+[Source](https://www.digitalocean.com/community/tutorials/how-to-deploy-a-flask-application-on-an-ubuntu-vps)
 
 ## Update database path
 
@@ -193,3 +229,5 @@ application.secret_key = 'super_secret_key
 
 Go to `/var/www/catalog` create file with `sudo nano .htaccess`
 Add the following file and save: `RedirectMatch 404 /\.git`
+
+[Source](https://stackoverflow.com/questions/6142437/make-git-directory-web-inaccessible)
